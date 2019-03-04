@@ -18,13 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                     MyWebsite
+                     My Website
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -40,7 +41,6 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
-
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}"> Login</a>
                             </li>
@@ -50,11 +50,6 @@
                                 </li>
                             @endif
                         @else
-                        @if(Auth::check()) 
-                            <li> 
-                            <a class="nav-item nav-link theme-faded-bg-light" href="{{ url('blog') }}">  Blog</a>
-                            </li>
-                        @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }} <span class="caret"></span>
@@ -66,7 +61,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf

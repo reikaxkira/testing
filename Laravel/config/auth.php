@@ -17,7 +17,7 @@ return [
         'guard' => 'web',
         'passwords' => 'users',
     ],
-
+  
     /*
     |--------------------------------------------------------------------------
     | Authentication Guards
@@ -97,6 +97,17 @@ return [
             'table' => 'password_resets',
             'expire' => 60,
         ],
+    'guards' => [
+        'client' => [
+            'driver' => 'session',
+            'provider' => 'clients',
+        ],
+        'user' => [
+            'driver' => 'session',
+            'provider' => 'users',
+        ],
     ],
-
+    ],
+       
+    
 ];
