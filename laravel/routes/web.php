@@ -25,10 +25,13 @@ Route::get('admin',function(){
     return view('admin');
 });
 
-
-// Route::get('create/blog',function(){
-//     return view('blog');
-// })->name('blog');
-
-
 Route::resource('admin','BlogController');
+
+Route::get('/form/blog', 'BlogController@blogform');
+
+Route::post('create/blog', 'BlogController@store');
+
+
+Route::get('/blog/update', function () {
+    return view('update');
+});

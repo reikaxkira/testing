@@ -10,8 +10,8 @@
                   <div class="card-header"></div>
                 
                   <div class="card-body">
-                        <h2> Create Blog</h2>
-                  <form method="post" action="{{ url('create/blog') }}">
+                        <h2> Update Blog</h2>
+                  <form method="post" action="{{ url('admin.update') }}">
                         <input type="hidden" name="_token" id="csrf-token" value="{{ Session::token() }}" />
                                <div class="form-group">
                                     <label for="name">Title</label>
@@ -29,14 +29,15 @@
                                           <strong></strong>
                                           </span>
                                </div>
-                               <button type="submit" class="btn btn-primary">Create post</button> 
-                               </form>       
+                               <button type="submit" class="btn btn-primary">Update post</button> 
+                   </form>       
+                   
                                @if($errors->any())
                                  <div class="alert alert-danger">
-                                     @foreach($errors->all() as $error)
+                                    @foreach($errors->all() as $error)
                                         <p>{{ $error }}</p>
-                                     @endforeach
-                                 </div>
+                                    @endforeach
+                                          </div>
                                @endif
                   </div>
               </div>
