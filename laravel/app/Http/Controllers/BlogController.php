@@ -15,13 +15,21 @@ class BlogController extends Controller
     public function index()
     {
         $blogs = Blog::all();
-        return view('admin',compact('blogs'));
+        // return view('admin')->with('blogs', $blogs);
+        return view('admin', compact('blogs'));
     }
+
 
     public function blogform()
     {
         return view('blog');
         
+    }
+
+    public function editform($id)
+    {
+        $blogs = Blog::find($id);
+        return view('edit',compact('blogs'));   
     }
 
     /**
@@ -42,17 +50,15 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'title' => 'required',
+        $request->validate([
+            'title'=>'required',
+            'slugs'=>'required | unique:Blogs',
             'description' => 'required',
         ]);
         //save data into database
         Blog::create($request->all());
-        return redirect()->route('admin.index')
-                         ->with('success','Blog added successfully.');
-    }
-
-    
+        return redirect()->back()->with('message','Blog added successfully.');
+        }
 
     /**
      * Display the specified resource.
@@ -73,7 +79,10 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $blog = Blog::find($id);
+        // return view('edit',compact('id'));
+        
+        
     }
 
     /**
@@ -83,11 +92,34 @@ class BlogController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-        $blogs->update($request->all());
-        return redirect()->route('admin.index');
+    public function updates(Request $request, $id) { 
+        $request->validate([
+            'slugs'=>'required | unique:Blogs'
+        ]);
+        // $blogs = Blog::find($id);
+        // $blogs->title = $request->get('title');
+        // $blogs->slugs = $request->get('slugs'); 
+        // $blogs->description = $request->get('description');
+        // $blogs->save();
+        // return redirect()->back()->with('message','Blog added successfully.');
+
+        $blogs = $request->all();
+        dd($blogs);
+
+        $test->fill($blogs)->save();
     }
+
+    public function update(Request $request, $id)
+    {  
+        // $blogs = Blog::find($id);
+        // $blogs->title = $request->get('title');
+        // $blogs->slugs = $request->get('slugs'); 
+        // $blogs->description = $request->get('description');
+        // $blogs->save();
+        // return redirect()->back()
+        //                  ->with('message','Blog added successfully.');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -98,9 +130,9 @@ class BlogController extends Controller
 
     public function destroy($id)
     {
-        
         blog::find($id)->delete();
-        return redirect()->route('admin.index')->back();
+        return redirect()->route('admin.index')->with('message','Post has been deleted successfully');
     }
-
 }
+
+
