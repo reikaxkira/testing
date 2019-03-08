@@ -33,9 +33,9 @@ Route::resource('admin','BlogController');
 Route::get('/admin/create', 'BlogController@blogform');
 
 
-Route::put('/admin/update/{id}', 'BlogController@update')-> name('updates');
+Route::put('/admin/update/{id}', 'BlogController@updates')-> name('updates');
 // Route::put('/admin/update/{id}', 'BlogController@update')-> name('update');
-Route::post('/admin/edit/{id}', 'BlogController@editform')-> name('edit');
+Route::get('/admin/{id}/get', 'BlogController@editform')-> name('edit');
 
 
 // Route::post('albums/update/{id}', ['uses' => 'BlogController@editform']) -> name('update');

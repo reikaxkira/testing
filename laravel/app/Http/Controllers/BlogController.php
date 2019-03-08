@@ -14,8 +14,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $blogs = Blog::all();
-        // return view('admin')->with('blogs', $blogs);
+        // $blogs = Blog::all();
+        $blogs = Blog::paginate(5);
         return view('admin', compact('blogs'));
     }
 
@@ -96,17 +96,15 @@ class BlogController extends Controller
         $request->validate([
             'slugs'=>'required | unique:Blogs'
         ]);
-        // $blogs = Blog::find($id);
-        // $blogs->title = $request->get('title');
-        // $blogs->slugs = $request->get('slugs'); 
-        // $blogs->description = $request->get('description');
+        $blogs = Blog::find($id);
+        $blogs->title = $request->get('title');
+        $blogs->slugs = $request->get('slugs'); 
+        $blogs->description = $request->get('description');
+        $blogs->save();
+        return redirect()->back()->with('message','Blog updated successfully.');
+
+        // $blogs = $request->all();
         // $blogs->save();
-        // return redirect()->back()->with('message','Blog added successfully.');
-
-        $blogs = $request->all();
-        dd($blogs);
-
-        $test->fill($blogs)->save();
     }
 
     public function update(Request $request, $id)
