@@ -14,7 +14,7 @@
     <script src="path/to/jquery.js"></script>
     <script src="path/to/popper.js"></script>
     <script src="path/to/bootstrap.js"></script>
-    <script src="path/to/bootstrap-confirmation.js"></script>
+    <script src="path/to/bootstrap-confirmation.js"></script> 
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -34,11 +34,11 @@
                 @endguest
               @if(Auth::check())
                 <a class="navbar-brand" href="{{ url('home') }}">
-                MyWebsite
+                My Admin Page
                </a>
               @endif
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -74,8 +74,6 @@
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
-
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         @csrf
                                     </form>

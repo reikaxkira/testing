@@ -23,22 +23,10 @@ Route::get('/index', function () {
 
 Auth::routes();
 
-
-Route::get('/home', 'HomeController@index');
-
-Route::get('admin',function(){
-    return view('admin');
-});
-Route::resource('admin','BlogController');
+Route::get('/admin', 'BlogController@indexs')-> name('indexs');
 Route::get('/admin/create', 'BlogController@blogform');
-
-
 Route::put('/admin/update/{id}', 'BlogController@updates')-> name('updates');
-// Route::put('/admin/update/{id}', 'BlogController@update')-> name('update');
-Route::get('/admin/{id}/get', 'BlogController@editform')-> name('edit');
-
-
-// Route::post('albums/update/{id}', ['uses' => 'BlogController@editform']) -> name('update');
-
+Route::get('/admin/edit/{slugs}', 'BlogController@editform')-> name('edit');
 Route::post('create/blog', 'BlogController@store')-> name('created');
 Route::delete('delete/blog/{id}', 'BlogController@destroy')-> name('delete');
+

@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Kernel;
 use App\Blog;
+use Illuminate\Validation\Rule;
+
+
 
 class BlogController extends Controller
 {
@@ -12,10 +15,11 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+
+    public function indexs()
     {
         // $blogs = Blog::all();
-        $blogs = Blog::paginate(5);
+        $blogs = Blog::paginate(8);
         return view('admin', compact('blogs'));
     }
 
@@ -26,111 +30,55 @@ class BlogController extends Controller
         
     }
 
-    public function editform($id)
+    public function editform($slugs)
     {
-        $blogs = Blog::find($id);
+        $blogs = Blog::where('slugs', $slugs)->first();
         return view('edit',compact('blogs'));   
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
+    public function updates(Request $request,$id)
+    {   
+        $request->validate([
+            'title'=>'required',
+            'slugs' => ['required','alpha_dash',
+             Rule::unique('blogs','slugs')->ignore($id,'id')],
+            'description' => 'required | max:255',
+        ]);
+        
+        // Validator::make($request, [
+        //     'slugs' => ['required',
+        //         Rule::unique('blogs','slugs')->ignore($blogs,'slugs'),
+        // ],
+        // ]);
 
+        $blogs = Blog::where('id', $id)->first();
+        $blogs->title=$request->input('title'); 
+        $blogs->slugs=$request->input('slugs'); 
+        $blogs->description=$request->input('description');
+        $blogs->save();
+        return redirect()->route('indexs')->with('message','Blog updated successfully.');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $request->validate([
             'title'=>'required',
-            'slugs'=>'required | unique:Blogs',
-            'description' => 'required',
+            'slugs'=>'required | alpha_dash | unique:Blogs',
+            'description' => 'required | max:255',
         ]);
         //save data into database
         Blog::create($request->all());
         return redirect()->back()->with('message','Blog added successfully.');
-        }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+                       
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        // $blog = Blog::find($id);
-        // return view('edit',compact('id'));
-        
-        
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function updates(Request $request, $id) { 
-        $request->validate([
-            'slugs'=>'required | unique:Blogs'
-        ]);
-        $blogs = Blog::find($id);
-        $blogs->title = $request->get('title');
-        $blogs->slugs = $request->get('slugs'); 
-        $blogs->description = $request->get('description');
-        $blogs->save();
-        return redirect()->back()->with('message','Blog updated successfully.');
-
-        // $blogs = $request->all();
-        // $blogs->save();
-    }
-
-    public function update(Request $request, $id)
-    {  
-        // $blogs = Blog::find($id);
-        // $blogs->title = $request->get('title');
-        // $blogs->slugs = $request->get('slugs'); 
-        // $blogs->description = $request->get('description');
-        // $blogs->save();
-        // return redirect()->back()
-        //                  ->with('message','Blog added successfully.');
-    }
-
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
 
     public function destroy($id)
     {
         blog::find($id)->delete();
-        return redirect()->route('admin.index')->with('message','Post has been deleted successfully');
+        return redirect()->route('indexs')->with('message','Post has been deleted successfully');
     }
 }
+
+
 
 

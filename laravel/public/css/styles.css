@@ -5,3 +5,13 @@ body {
 #Description1 { 
   height : 300px;
 }
+/* 
+.divlinebreak { 
+   width:
+} */
+
+.linebreak{
+  border-top: 200px solid #8c8b8b;
+  width: 500%;
+ 
+}
