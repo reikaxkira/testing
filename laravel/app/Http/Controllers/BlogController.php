@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Kernel;
 use App\Blog;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Str;
 
 
 
@@ -12,9 +13,21 @@ class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+    *
      * @return \Illuminate\Http\Response
      */
+    public function indexpage()
+    {
+        $blogs = Blog::paginate(2);
+        // $blogs = Blog::pagination(4);
+        return view('index', compact('blogs'));
+    }
+
+    public function show($slugs) { 
+        $blogs = Blog::where('slugs', $slugs)->first();
+        return view('view',compact('blogs'));
+    }
+    
 
     public function indexs()
     {
