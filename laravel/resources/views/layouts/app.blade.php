@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,7 +10,9 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/angular.min.js') }}"></script>
+    <script src="{{ asset('js/a_angular.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -20,14 +22,14 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
 </head>
-<body>
+<body ng-app="myApp" ng-controller="loginController">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                     My Website
+                <a class="navbar-brand" href="{{ url('/index') }}">
+                     My Blog Title
                 </a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -73,9 +75,9 @@
             </div>
         </nav>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
+            <main class="py-4">
+               @yield('content')
+            </main>
     </div>
 </body>
 </html>

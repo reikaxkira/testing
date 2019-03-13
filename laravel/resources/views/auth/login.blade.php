@@ -16,12 +16,13 @@
                                </ul>
                          </div>
                        @endif
-                    <form method="POST" action="{{ route('login') }}">
+                    <form ng-submit="submit()">
+                            {{-- <form method="POST" action="{{ route('login') }}" ng-submit="submit()"> --}}
                         @csrf
                         <div class="form-group row">
                             <label for="email" class="col-md-4 col-form-label text-md-right"> Email Address</label>
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email">
+                                <input id="email" type="email" class="form-control" name="email" ng-model="email">
                             </div>
                         </div>
 
@@ -29,7 +30,7 @@
                             <label for="password" class="col-md-4 col-form-label text-md-right"> Password</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
+                                <input id="password" type="password" class="form-control" name="password" ng-model="password">
                             </div>
                         </div>
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app1.js') }}" defer></script>
     <script src="path/to/jquery.js"></script>
     <script src="path/to/popper.js"></script>
     <script src="path/to/bootstrap.js"></script>
@@ -34,24 +35,22 @@
                             @if(Auth::check()) 
                                   <a class="navbar-brand" href="{{ url('index') }}">My Admin Page</a>
                             @endif  
-                                             <div class="collapse navbar-collapse" id="navbarSupportedContent">  
-                                                 <ul class="navbar-nav mr-auto"></ul>
+                                    <div class="collapse navbar-collapse" id="navbarSupportedContent">  
+                                            <ul class="navbar-nav mr-auto"></ul>
                                              <div class="row m-4">  
-                                         @guest
-                                            
-                                                      <a class="btn btn-primary" href="{{ route('login') }}"> Login</a>
+                                                  @guest
+                                                   <a class="btn btn-primary" href="{{ route('login') }}"> Login</a>
                              @else
-                                              </div>
-                                               @if(Auth::check()) 
-                                               <h5 class=""> Welcome Admin {{Auth::user()->name}} </h5>
-                                               @endif    
-                                            </div>  
-
+                                                </div>
+                                                  @if(Auth::check()) 
+                                                     <h5 class=""> Welcome Admin {{Auth::user()->name}} </h5>
+                                                  @endif    
+                                               </div> 
                                              </div>
                             
                                          @endguest
                    
-                                 </div>
+                                     </div>
                  </div>
          </nav>
 
