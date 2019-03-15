@@ -10,8 +10,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/app1.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}" ></script>
+    <script src="{{ asset('js/app1.js') }}"></script>
     <script src="path/to/jquery.js"></script>
     <script src="path/to/popper.js"></script>
     <script src="path/to/bootstrap.js"></script>
@@ -26,7 +26,7 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>
 <body>
-     <div id="app"> 
+     <div> 
         <nav class="navbar navbar-expand-md navbar-light">
              <div class="container">
                         @guest     
@@ -73,6 +73,5 @@
                                              </main>
      </div>
 </body>
-
-
+<script src="{{ asset('js/a_angular.js') }}"></script>
 </html>

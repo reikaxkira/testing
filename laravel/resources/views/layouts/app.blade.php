@@ -10,9 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/angular.min.js') }}"></script>
-    <script src="{{ asset('js/a_angular.js') }}"></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -22,7 +20,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     
 </head>
-<body ng-app="myApp" ng-controller="loginController">
+<body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
@@ -44,11 +42,11 @@
                         <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}"> Login</a>
+                                <a class="nav-link" href={{route('showlogin')}}> Login</a>
                             </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}"> Register</a>
+                                    <a class="nav-link" href={{route('blog.register')}}> Register</a>
                                 </li>
                             @endif
                         @else
@@ -80,4 +78,15 @@
             </main>
     </div>
 </body>
+
+
+<script> 
+        window.login = {
+            routeslogin: '{{ route('login') }}'  
+        };
+    </script>
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/angular.min.js') }}"></script>
+<script src="{{ asset('js/a_angular.js') }}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
 </html>

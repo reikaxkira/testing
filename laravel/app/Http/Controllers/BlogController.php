@@ -4,28 +4,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Kernel;
 use App\Blog;
+use App\User;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 
 
-class BlogController extends Controller
-{
-    /**
-     * Display a listing of the resource.
-    *
-     * @return \Illuminate\Http\Response
-     */
+class BlogController extends Controller {
+        
+
+     
     public function indexpage()
     {
         $blogs = Blog::paginate(2);
-        // $blogs = Blog::pagination(4);
         return view('index', compact('blogs'));
     }
 
     public function show($slugs) { 
         $blogs = Blog::where('slugs', $slugs)->first();
         return view('view',compact('blogs'));
+        
     }
     
 
@@ -70,10 +68,12 @@ class BlogController extends Controller
         $blogs->description=$request->input('description');
         $blogs->save();
         return redirect()->route('indexs')->with('message','Blog updated successfully.');
+
     }
 
     public function store(Request $request)
     {
+
         $request->validate([
             'title'=>'required',
             'slugs'=>'required | alpha_dash | unique:Blogs',
