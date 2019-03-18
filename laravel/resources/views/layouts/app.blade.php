@@ -82,11 +82,17 @@
 
 <script> 
         window.login = {
-            routeslogin: '{{ route('login') }}'  
+            routeslogin: '{{ route('login') }}'
+        };  
+
+        window.admin = { 
+            routesadmin: '{{ route('indexs') }}'
         };
-    </script>
-<script src="{{ asset('js/app.js') }}"></script>
+    
+</script>
+{{-- <script src="{{ asset('js/app.js') }}"></script> --}}
 <script src="{{ asset('js/angular.min.js') }}"></script>
 <script src="{{ asset('js/a_angular.js') }}"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.16/angular.min.js"></script>
 </html>

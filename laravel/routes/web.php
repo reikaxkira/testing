@@ -15,12 +15,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+
+Route::get('/home', function () {
+    return view('home');
+});
+
 // Route::get('/login', function () {
 //     return view('auth.login');
 // });
  
-// Auth::routes();
-//--------------------------------------------------
+// Auth::routes();  
+//------------------------------------------------------------------------------
 Route::get('login', 'Auth\LoginController@showLoginForm')->name('showlogin');
 Route::post('login', 'Auth\LoginController@login')->name('login');
 Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -29,7 +34,7 @@ Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 Route::get('register', 'Auth\RegisterController@showRegistrationForm')->name('register');
 Route::post('register', 'Auth\RegisterController@register')->name('blog.register');
 
-//------------
+//-------------------------------------------------------------------------------
 
 Route::get('/index', 'BlogController@indexpage')->name('indexpage');
 Route::get('/admin', 'BlogController@indexs')->name('indexs');

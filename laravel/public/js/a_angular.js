@@ -1,35 +1,38 @@
-var myApp = angular.module('myApp', []);
-myApp.controller("loginController", function ($scope, $http, $log) 
+var app = angular.module('myApp',[]);
+app.controller("loginController", function ($scope, $http, $log,$location,$window) 
 {
-   $scope.onclicksuccess = function() 
-     {
-        $log.log('Hello World!');
-     }
-
-    $scope.doLogin = function() {
-     var login = { 'email': $scope.login.email, 'password': $scope.login.password } 
-       $http({
-        method: 'POST',
-        url: window.login.routeslogin}).then(function successCallback(response) {
-             
-        }, function errorCallback(response) {
-
-        });
-  
-    //    console.log($scope.login);
-     
-    //   $http({ 
-    //     method:  'POST',
-    //     url: window.login.routeslogin,
-    //  }).then(function(){
-    //     console.log($scope.login);
-    //  }) 
-       
-
-
-    }
+    $scope.onclicksuccess = function() 
+       {
+          $log.log('Hello World!');
+       }
+   
+    $scope.doLogin = function() 
+       {
+          $scope.login = { 
+                           'email': $scope.login.email, 
+                           'password': $scope.login.password 
+                         } 
+            // for debugging 
+            console.log($scope.login);                
+            $http.post( window.login.routeslogin, $scope.login)
+             .then(function(response)
+             {   
+                $scope.login = response.data;
+                console.log('response', response);
+                $window.location.href = window.admin.routesadmin;
+                
+             },
+           function(response) { 
+                
+           });     
+           
+       }
 
 });
+
+
+
+
 
 // var app = angular.module('employeeRecords', []);
 

@@ -11,68 +11,48 @@ use App\User;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-    // public function authenticate(Request $request)
-    // {
-    //     $credentials = $request->only('email', 'password');
-
-    //     if (Auth::attempt($credentials)) {
-    //         return redirect()->intended('/admin');
-    //     }
-    // }
-
+ 
     public function showLoginForm()
     {   
-
        return view('auth.login');
     }
 
 
     public function login (Request $request) { 
 
-        // dd($request->all());
-        // $request->validate([
-        //     'email'=>'required|email',
-        //     'password' => 'required',
-        // ]);
-        return response($content);
+        $request->validate([
+            'email'=>'required|email',
+            'password' => 'required',
+        ]);
+
         $credentials = $request->only('email', 'password');
-
         if (Auth::attempt($credentials)) {
-            // Authentication passed...
-            return redirect()->intended('admin');
-        //    return['status' => 'redirect',
-        //     'to' => route('admin')];
-
-        //     return [
-        //         'status' => 'failed',
-        //         'message' => 'Email or password are wrong'
-        //     ];
-
-         }
+            // return redirect()->intended('admin');
+            return response()->redirectTo('admin');
+        }
+        // $email=$request->input('email'); 
+        // $password=$request->input('password'); 
+    
+        // if (Auth::attempt($request->only($email,$password))) {
+        //     return response()->redirectTo('index');
+        // }
+        // else { 
+        //     return response()->redirectTo('login');
+        // }
     }
 
 
+   
+    // }
     public function logout(Request $request)
     {
         Auth::logout();
         return redirect('/login');
     }
-
     protected function loggedOut(Request $request)
     {
-   
+         
     }
-    
 
     public function __construct()
     {

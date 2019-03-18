@@ -25,7 +25,6 @@ class BlogController extends Controller {
         return view('view',compact('blogs'));
         
     }
-    
 
     public function indexs()
     {
