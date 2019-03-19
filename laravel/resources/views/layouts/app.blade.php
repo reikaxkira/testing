@@ -78,8 +78,6 @@
             </main>
     </div>
 </body>
-
-
 <script> 
         window.login = {
             routeslogin: '{{ route('login') }}'
@@ -87,6 +85,9 @@
 
         window.admin = { 
             routesadmin: '{{ route('indexs') }}'
+        };
+        window.showlogin = { 
+            routesshowlogin: '{{ route('showlogin') }}'
         };
     
 </script>

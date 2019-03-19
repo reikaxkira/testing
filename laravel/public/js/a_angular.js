@@ -9,26 +9,30 @@ app.controller("loginController", function ($scope, $http, $log,$location,$windo
     $scope.doLogin = function() 
        {
           $scope.login = { 
-                           'email': $scope.login.email, 
+                           'email':  $scope.login.email, 
                            'password': $scope.login.password 
                          } 
             // for debugging 
             console.log($scope.login);                
-            $http.post( window.login.routeslogin, $scope.login)
+            $http.post(window.login.routeslogin, $scope.login)
              .then(function(response)
              {   
-                $scope.login = response.data;
+                // $scope.login = response.data;
                 console.log('response', response);
-                $window.location.href = window.admin.routesadmin;
-                
+                // window.history.pushState( {} , window.admin.routesadmin, window.admin.routesadmin );
+                $window.location.href = window.admin.routesadmin;  
              },
-           function(response) { 
-                
+           function(error) { 
+                if(error.status == '400') { 
+                  $scope.error='Email credentials not found';
+                }
            });     
            
        }
 
 });
+
+
 
 
 

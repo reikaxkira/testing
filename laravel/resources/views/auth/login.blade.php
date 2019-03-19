@@ -22,23 +22,35 @@
                                    @endforeach
                                </ul>
                          </div> 
-                       @endif--}}
+                       @endif --}}
+                
+
+
                   <div ng-app="myApp" ng-controller="loginController">
                        <form name="form" ng-submit="doLogin()">
                             @csrf            
                         <div class="form-group row">
                                 <label for="email" class="col-md-4 col-form-label text-md-right"> Email</label>
                             <div class="col-md-6">
-                            <input id="email" type="email" class="form-control" name="email" ng-model="login.email" value="{{ old('email') }}" required>
-                                    <span ng-show="form.email.$error.email">Invalid email address</span>
-                                    <span ng-show="form.email.$error.required && form.email.$dirty">Required</span>
+                            <input id="email" type="email" class="form-control" name="email"  ng-model="login.email" value="{{ old('email') }}">
+                                    {{-- <span ng-show="form.email.$error.email">Invalid email address</span>
+                                    <span ng-show="form.email.$error.required && form.email.$dirty">Required</span> --}}
+                                    @verbatim
+                                    {{ data }}
+                                    @endverbatim
+                                    @verbatim
+                                    <span class="error" ng-show="error" ng-model="error" ng-cloak> 
+                                        {{ error }}
+                                    </span>
+                                    @endverbatim
+                                    {{-- <span class="help-block" ng-show="errors.email[0]">@{{ errors.email.toString()}}</span> --}}
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right"> Password</label>
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" ng-model="login.password" required>
+                                <input id="password" type="password" class="form-control" name="password" ng-model="login.password">
                                 <span ng-show="form.password.$touched && form.password.$invalid"> Required</span>
                             </div>
                         </div>
