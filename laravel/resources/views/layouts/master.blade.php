@@ -74,4 +74,6 @@
      </div>
 </body>
 <script src="{{ asset('js/a_angular.js') }}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
+
 </html>

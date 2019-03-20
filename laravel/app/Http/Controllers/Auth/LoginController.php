@@ -22,29 +22,27 @@ class LoginController extends Controller
 
     public function login (Request $request) { 
 
-        // $request->validate([
-        //     'email'=>'required|email',
-        //     'password' => 'required',
+        // $this->validate($request, [
+        //     'email'=>'required',
+        //     'password'=>'required',
         // ]);
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique',
-            'password' => 'required',
-        ]);
-    
-        if($validator->fails()) {    
-            return response()->json($validator->errors()->all(),200);
-          }
-         
-        $credentials = [
-             'email'=>$request->input('email'),
-             'password'=>$request->input('password')
-        ];  
+        // $validator = Validator::make($request->all(), [
+        //     'email' => 'required|email',
+        //     'password' => 'required',
+        // ])->validate();
+
+        if (!$request->has('sample') ) {
+            return response()->json(['error' => 'Sample'], 400);
+        }
+             
+        $credentials = ['email'=>$request->input('email'),
+                       'password'=>$request->input('password')];  
         
 
         if(!Auth::attempt($credentials)) {  
-            return response()->json(['error' => 'Account not found'], 400);
+            return response()->json(['error' => 'Email Account not found'], 400);
         }
-            return response()->json(['message' => 'success']);
+            return response()->json(['message' => 'Successful on login']);
         }
         
 //             //if ($validator->fails()) {    

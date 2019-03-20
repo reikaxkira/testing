@@ -1,34 +1,34 @@
-var app = angular.module('myApp',[]);
-app.controller("loginController", function ($scope, $http, $log,$location,$window) 
+var app = angular.module('myApp', []);
+app.controller("loginController", function ($scope, $http, $window) 
 {
-    $scope.onclicksuccess = function() 
-       {
-          $log.log('Hello World!');
-       }
+    // $scope.onclicksuccess = function() 
+    //    {
+    //       $log.log('Hello World!');
+    //    }
    
     $scope.doLogin = function() 
-       {
-          $scope.login = { 
-                           'email':  $scope.login.email, 
-                           'password': $scope.login.password 
-                         } 
-            // for debugging 
-            console.log($scope.login);                
-            $http.post(window.login.routeslogin, $scope.login)
-             .then(function(response)
-             {   
-                // $scope.login = response.data;
+    {                
+        $http.post(window.login.routeslogin, $scope.login)
+            .then(function(response)
+              {   
+                $scope.login = response.data;
                 console.log('response', response);
-                // window.history.pushState( {} , window.admin.routesadmin, window.admin.routesadmin );
                 $window.location.href = window.admin.routesadmin;  
-             },
-           function(error) { 
-                if(error.status == '400') { 
-                  $scope.error='Email credentials not found';
-                }
-           });     
-           
-       }
+              },   
+                function(response)
+                { 
+                   $scope.email = response.data.errors;
+                   $scope.password = response.data.errors;
+                   $scope.error = response.status;
+                      if($scope.error == '400') 
+                      { 
+                      $scope.nodata='User credentials not found';
+                      }   
+                 },
+               );       
+    }
+    
+  //  $scope.create
 
 });
 
